@@ -21,11 +21,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
 
       - name: 3. Install Dependencies
         run: |
-          npm install
+          npm install --legacy-peer-deps
 
       - name: 4. Build Production Web Assets
         run: |
@@ -68,6 +67,7 @@ jobs:
 
       - name: 12. Publish Direct Download Release
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch'
+        continue-on-error: true
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.0.0

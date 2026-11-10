@@ -16,14 +16,14 @@
 
 <p align="center">
   <!-- Prominent Primary Download CTA -->
-  <a href="https://github.com/kishaantamilmani/rupee-tracker/releases/latest/download/RupeeTracker.apk">
+  <a href="https://github.com/Kishaan1/Rupee-Tracker/releases/latest/download/RupeeTracker.apk">
     <img src="https://img.shields.io/badge/%E2%AC07%20DOWNLOAD%20FOR%20ANDROID%20(APK)-RupeeTracker.apk-10b981?style=for-the-badge&logo=android&logoColor=white&labelColor=064e3b" height="46" alt="Download for Android APK" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/kishaantamilmani/rupee-tracker/releases/latest">
-    <img src="https://img.shields.io/github/v/release/kishaantamilmani/rupee-tracker?color=10b981&label=Latest%20Release&style=flat-square" alt="Latest Release" />
+  <a href="https://github.com/Kishaan1/Rupee-Tracker/releases/latest">
+    <img src="https://img.shields.io/github/v/release/Kishaan1/Rupee-Tracker?color=10b981&label=Latest%20Release&style=flat-square" alt="Latest Release" />
   </a>
   <img src="https://img.shields.io/badge/APK%20Size-2.55%20MB-0ea5e9?style=flat-square&logo=android" alt="APK Size" />
   <img src="https://img.shields.io/badge/Storage-100%25%20Offline%20SQLite-10b981?style=flat-square&logo=sqlite" alt="Offline SQLite" />
@@ -37,9 +37,9 @@
 
 | Method | Target Link | Description |
 |:---|:---|:---|
-| **Primary (GitHub Release)** | [**⬇ Download RupeeTracker.apk**](https://github.com/kishaantamilmani/rupee-tracker/releases/latest/download/RupeeTracker.apk) | Direct APK download from the latest tagged cloud build release |
+| **Primary (GitHub Release)** | [**⬇ Download RupeeTracker.apk**](https://github.com/Kishaan1/Rupee-Tracker/releases/latest/download/RupeeTracker.apk) | Direct APK download from the latest tagged cloud build release |
 | **Direct APK Mirror** | [**⬇ Download via App Server**](https://ais-pre-cdzx7rbbzk2a2zunjzkc45-777447338205.asia-northeast1.run.app/download/RupeeTracker.apk) | Instant binary download directly to your mobile browser |
-| **All Releases** | [**View Release Assets & Changelog**](https://github.com/kishaantamilmani/rupee-tracker/releases) | Release tags, build checksums, and workflow artifacts |
+| **All Releases** | [**View Release Assets & Changelog**](https://github.com/Kishaan1/Rupee-Tracker/releases) | Release tags, build checksums, and workflow artifacts |
 
 > *Note: If downloading a new release before the first GitHub Action run finishes, trigger the workflow once in the Actions tab or use the Direct APK Mirror link above.*
 
@@ -130,7 +130,7 @@ The application is styled with a commercial-grade fintech aesthetic:
 ## 📱 4. How to Download & Install on Android
 
 ### Method 1: Direct APK Download on Your Phone (Recommended)
-1. Tap the [**⬇ DOWNLOAD FOR ANDROID (APK)**](https://github.com/kishaantamilmani/rupee-tracker/releases/latest/download/RupeeTracker.apk) button at the top of this page.
+1. Tap the [**⬇ DOWNLOAD FOR ANDROID (APK)**](https://github.com/Kishaan1/Rupee-Tracker/releases/latest/download/RupeeTracker.apk) button at the top of this page.
 2. If Chrome shows *"File might be harmful"*, tap **Download anyway** (standard warning for direct APK downloads outside Google Play).
 3. Swipe down your notification shade and tap `RupeeTracker.apk` (or open it from your phone's **Files** / **Downloads** app).
 4. If prompted *"For your security, your phone is not allowed to install unknown apps from this source"*, tap **Settings** $\rightarrow$ toggle **Allow from this source** on $\rightarrow$ tap Back.
