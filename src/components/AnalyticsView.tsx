@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { RupeeEntry } from '../types';
 import { formatRupee, getTimeRanges } from '../utils/formatters';
-import { BarChart3, PieChart, TrendingUp, Wallet, Layers, Award, Tag } from 'lucide-react';
+import { BarChart3, PieChart, TrendingUp, Wallet, Layers, Award, Tag, Calendar, ArrowUpRight, ArrowDownRight, Minus } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface AnalyticsViewProps {
@@ -18,6 +18,49 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({ entries }) => {
   const highestAmount = useMemo(() => {
     if (entries.length === 0) return 0;
     return Math.max(...entries.map((e) => e.amount));
+  }, [entries]);
+
+  // Comparative metrics (Today vs Yesterday, This Week vs Last Week, This Month vs Last Month)
+  const comparisons = useMemo(() => {
+    const now = new Date();
+    const { dayStart, dayEnd, weekStart, weekEnd, monthStart, monthEnd } = getTimeRanges();
+
+    // Yesterday
+    const yestStart = dayStart - 86400000;
+    const yestEnd = dayEnd - 86400000;
+
+    // Last Week
+    const lastWeekStart = weekStart - 7 * 86400000;
+    const lastWeekEnd = weekEnd - 7 * 86400000;
+
+    // Last Month
+    const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
+    const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999).getTime();
+
+    let today = 0, yest = 0;
+    let thisWeek = 0, lastWeek = 0;
+    let thisMonth = 0, lastMonth = 0;
+
+    for (const e of entries) {
+      const t = e.timestamp;
+      if (t >= dayStart && t <= dayEnd) today += e.amount;
+      if (t >= yestStart && t <= yestEnd) yest += e.amount;
+
+      if (t >= weekStart && t <= weekEnd) thisWeek += e.amount;
+      if (t >= lastWeekStart && t <= lastWeekEnd) lastWeek += e.amount;
+
+      if (t >= monthStart && t <= monthEnd) thisMonth += e.amount;
+      if (t >= lastMonthStart && t <= lastMonthEnd) lastMonth += e.amount;
+    }
+
+    return {
+      today,
+      yest,
+      thisWeek,
+      lastWeek,
+      thisMonth,
+      lastMonth,
+    };
   }, [entries]);
 
   // Daily entry trends (Last 7 or 30 days)
@@ -87,7 +130,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({ entries }) => {
   }, [entries, totalAmount]);
 
   return (
-    <div className="w-full space-y-6 pb-20 animate-in fade-in duration-200">
+    <div className="w-full space-y-5 pb-20 animate-in fade-in duration-200">
       {/* Top Banner / Heading */}
       <div className="border-b border-zinc-200/80 dark:border-white/[0.08] pb-3">
         <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-50 flex items-center gap-2">
@@ -138,6 +181,54 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({ entries }) => {
           </div>
           <div className="text-lg sm:text-xl font-bold font-mono text-amber-500 dark:text-amber-400 truncate">
             {formatRupee(highestAmount)}
+          </div>
+        </div>
+      </div>
+
+      {/* Period Comparisons (Weekly & Monthly comparison) */}
+      <div className="rounded-3xl bg-white dark:bg-[#111318] border border-zinc-200/80 dark:border-white/[0.07] p-5 sm:p-6 shadow-xs space-y-3">
+        <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 font-sans">
+          Period Comparisons
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {/* Today vs Yesterday */}
+          <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-white/[0.02] border border-zinc-200/60 dark:border-white/[0.04] space-y-1">
+            <span className="text-[11px] font-mono text-zinc-400">Daily: Today vs Yesterday</span>
+            <div className="flex items-baseline justify-between">
+              <span className="text-base font-bold font-mono text-zinc-900 dark:text-zinc-100">
+                {formatRupee(comparisons.today)}
+              </span>
+              <span className="text-xs font-mono text-zinc-400">
+                vs {formatRupee(comparisons.yest)}
+              </span>
+            </div>
+          </div>
+
+          {/* This Week vs Last Week */}
+          <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-white/[0.02] border border-zinc-200/60 dark:border-white/[0.04] space-y-1">
+            <span className="text-[11px] font-mono text-zinc-400">Weekly: This Week vs Prior</span>
+            <div className="flex items-baseline justify-between">
+              <span className="text-base font-bold font-mono text-zinc-900 dark:text-zinc-100">
+                {formatRupee(comparisons.thisWeek)}
+              </span>
+              <span className="text-xs font-mono text-zinc-400">
+                vs {formatRupee(comparisons.lastWeek)}
+              </span>
+            </div>
+          </div>
+
+          {/* This Month vs Last Month */}
+          <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-white/[0.02] border border-zinc-200/60 dark:border-white/[0.04] space-y-1">
+            <span className="text-[11px] font-mono text-zinc-400">Monthly: Current vs Prior</span>
+            <div className="flex items-baseline justify-between">
+              <span className="text-base font-bold font-mono text-zinc-900 dark:text-zinc-100">
+                {formatRupee(comparisons.thisMonth)}
+              </span>
+              <span className="text-xs font-mono text-zinc-400">
+                vs {formatRupee(comparisons.lastMonth)}
+              </span>
+            </div>
           </div>
         </div>
       </div>
