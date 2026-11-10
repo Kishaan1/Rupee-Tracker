@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    name: Build Android APK
+    name: Build & Publish Android APK
     runs-on: ubuntu-latest
 
     steps:
@@ -68,14 +68,27 @@ jobs:
 
       - name: 12. Publish Direct Download Release
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: "Rupee Tracker - Android App"
+          body: |
+            ## 📱 Rupee Tracker — Installable Android APK
+
+            ### Direct Download
+            Tap **RupeeTracker.apk** below to download directly to your Android mobile phone!
+
+            - **App:** Rupee Tracker
+            - **Package:** `com.rupeetracker.app`
+            - **Storage:** 100% Offline Room SQLite
+            - **Fast-entry:** Auto keyboard focus & Enter-to-save
+            - **Compatibility:** Android 7.0+ (Nougat through Android 15)
+
+            ### Installation Instructions
+            1. Tap **RupeeTracker.apk** below to download directly to your phone.
+            2. Open the downloaded file from notifications or your *Files/Downloads* folder.
+            3. If prompted, allow "Install from unknown sources" for your browser.
+            4. Tap **Install** and start tracking!
+          files: build-output/RupeeTracker.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG_NAME="v1.0.0-apk"
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          gh release delete $TAG_NAME --yes || true
-          git tag -d $TAG_NAME 2>/dev/null || true
-          gh release create $TAG_NAME build-output/RupeeTracker.apk \
-            --title "Rupee Tracker Android APK v1.0.0" \
-            --notes "Installable standalone Android APK for Rupee Tracker. Built automatically via GitHub Actions in the cloud. Store: Room SQLite (100% offline). Supports physical keyboard Enter to save."
