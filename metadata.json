@@ -1,0 +1,6 @@
+{
+  "name": "Rupee Tracker - Minimalist Money Log",
+  "description": "Effortless, ultra-fast rupee entry tracker with instant timestamps, daily and overall totals, and persistent records.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

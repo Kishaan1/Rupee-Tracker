@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <linearGradient id="glyph" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e4e4e7"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="128" fill="url(#bg)"/>
+  <!-- Inner subtle border -->
+  <rect x="8" y="8" width="496" height="496" rx="120" fill="none" stroke="#27272a" stroke-width="8"/>
+  <!-- Rupee Symbol -->
+  <text x="256" y="340" font-family="'Outfit', -apple-system, sans-serif" font-size="280" font-weight="700" fill="url(#glyph)" text-anchor="middle">₹</text>
+</svg>
